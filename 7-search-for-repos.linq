@@ -9,11 +9,19 @@
   <Namespace>Octokit</Namespace>
 </Query>
 
+//This makes discovering code fun!!
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Naveen"));
 var gorepos = await client.Search.SearchRepo(new SearchRepositoriesRequest(string.Empty)
 	{Language = Language.Go});
 gorepos.Items.OrderByDescending (i => i.CreatedAt)
-.Take(100)
-.OrderByDescending (i => i.WatchersCount)
-.Take(30)
-.Dump();
+	.OrderByDescending (i => i.WatchersCount)
+	.Take(50)
+	.Select (i => new {
+			Name = i.Name, 
+			Description = i.Description ,
+			LastUpdated = i.UpdatedAt,
+			Url = i.HtmlUrl,
+			WatchCount = i.WatchersCount
+			})
+	.Dump();
+
