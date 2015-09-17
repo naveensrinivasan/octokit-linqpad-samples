@@ -9,7 +9,7 @@
   <Namespace>Octokit</Namespace>
 </Query>
 
-var client = new GitHubClient(new ProductHeaderValue("Bay.NET"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 
 var repositories = await client.Repository.GetAllForUser("haacked");
 repositories.Select(r => new { r.Name }).Dump();

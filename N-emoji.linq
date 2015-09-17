@@ -23,12 +23,12 @@
   <Namespace>System.Windows.Media.Imaging</Namespace>
 </Query>
 
-var client = new GitHubClient(new ProductHeaderValue("Bay.NET"));
-var emojis = await client.Miscellaneous.GetEmojis();
+var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
+var emojis = await client.Miscellaneous.GetAllEmojis();
 
 foreach (var emoji in emojis)
 {
   // i'm lazy, so the image is after th eky
-  String.Format(":{0}:", emoji.Key).Dump();
-  Util.Image (emoji.Value).Dump();
+  String.Format(":{0}:", emoji.Name).Dump();
+  Util.Image (emoji.Url).Dump();
 }
