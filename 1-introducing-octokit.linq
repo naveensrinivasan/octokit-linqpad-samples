@@ -1,17 +1,18 @@
 <Query Kind="Statements">
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
-  <NuGetReference>Octokit</NuGetReference>
   <NuGetReference>Octokit.Reactive</NuGetReference>
   <NuGetReference>Rx-Main</NuGetReference>
-  <Namespace>System.Reactive.Linq</Namespace>
-  <Namespace>System.Net.Http.Headers</Namespace>
   <Namespace>Octokit</Namespace>
+  <Namespace>System.Net.Http.Headers</Namespace>
+  <Namespace>System.Reactive.Linq</Namespace>
 </Query>
 
-var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("octokit samples"));
+
 var repository = await client.Repository.Get("octokit", "octokit.net");
-Console.WriteLine("Octokit.net can be found at {0}\n", repository.HtmlUrl);
+
+Console.WriteLine(String.Format("Octokit.net can be found at {0}\n", repository.HtmlUrl));
 
 Console.WriteLine("It currently has {0} watchers and {1} forks\n", 
 	repository.StargazersCount,
