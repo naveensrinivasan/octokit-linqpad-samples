@@ -24,7 +24,7 @@
   <Namespace>System.Windows.Media.Imaging</Namespace>
 </Query>
 
-var client = new GitHubClient(new ProductHeaderValue("Bay.NET"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 var text = await client.Miscellaneous.RenderRawMarkdown(
     "## HELLO BAY.NET\n\n"
   + ":dancer:\n\n"

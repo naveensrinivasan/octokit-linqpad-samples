@@ -17,12 +17,12 @@ var repo = "my-awesome-repo-" + Environment.TickCount;
 var author = "just some guy";
 var email = "person@cooldomain.com";
 
-var client = new GitHubClient(new ProductHeaderValue("Bay.NET"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 client.Credentials = new Credentials(owner, password);
 
 // 1 - create a repository through the API
-var newRepo = new NewRepository() { 
-  Name = repo, 
+var newRepo = new NewRepository(repo) { 
+  
   AutoInit = true // very helpful!
 };
 var repository = await client.Repository.Create(newRepo);

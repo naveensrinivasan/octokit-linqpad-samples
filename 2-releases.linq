@@ -9,6 +9,6 @@
   <Namespace>Octokit</Namespace>
 </Query>
 
-var client = new GitHubClient(new ProductHeaderValue("Bay.NET"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 var releases = await client.Release.GetAll("octokit", "octokit.net");
 releases.Select(r => new { r.Name, r.Body }).Dump();
