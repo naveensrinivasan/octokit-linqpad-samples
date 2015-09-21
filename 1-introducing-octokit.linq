@@ -8,9 +8,12 @@
   <Namespace>System.Reactive.Linq</Namespace>
 </Query>
 
+var owner = "octokit";
+var reponame = "octokit.net";
+
 var client = new GitHubClient(new Octokit.ProductHeaderValue("octokit samples"));
 
-var repository = await client.Repository.Get("octokit", "octokit.net");
+var repository = await client.Repository.Get(owner, reponame);
 
 Console.WriteLine(String.Format("Octokit.net can be found at {0}\n", repository.HtmlUrl));
 

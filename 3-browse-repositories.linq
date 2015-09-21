@@ -9,9 +9,10 @@
   <Namespace>Octokit</Namespace>
 </Query>
 
+var userName = "haacked";
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 
-var repositories = await client.Repository.GetAllForUser("haacked");
+var repositories = await client.Repository.GetAllForUser(userName);
 repositories.Select(r => new { r.Name }).Dump();
 
 // basic authentication
@@ -19,7 +20,10 @@ repositories.Select(r => new { r.Name }).Dump();
 
 // or if you don't want to give an app your creds
 // you can use a token from an OAuth app
-//client.Credentials = new Credentials("some-token-here");
+// Here is the URL to get tokens https://github.com/settings/tokens
+// and save the token using Util.SetPassword("github","CHANGETHIS")
+client.Credentials = new Credentials(Util.GetPassword("github"));
 
 // and then fetch the repositories for the current user
-//var repositories = await client.Repository.GetAllForCurrent()
+var repos = await client.Repository.GetAllForCurrent();
+repos.Select(r => r.Name).Dump();

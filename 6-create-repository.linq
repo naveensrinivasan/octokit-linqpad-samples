@@ -11,19 +11,26 @@
 
 // create a sample repository and modify the README
 // these credentials won't work, you'll need to provide your own
-var owner = "username";
-var password = "password";
+
+var owner = "naveensrinivasan";
 var repo = "my-awesome-repo-" + Environment.TickCount;
-var author = "just some guy";
+var author = "naveensrinivasan";
 var email = "person@cooldomain.com";
 
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
-client.Credentials = new Credentials(owner, password);
+
+// or if you don't want to give an app your creds
+// you can use a token from an OAuth app
+// Here is the URL to get tokens https://github.com/settings/tokens
+// and save the token using Util.SetPassword("github","CHANGETHIS")
+client.Credentials = new Credentials(Util.GetPassword("github"));
+
 
 // 1 - create a repository through the API
-var newRepo = new NewRepository(repo) { 
-  
-  AutoInit = true // very helpful!
+var newRepo = new NewRepository(repo)
+{
+
+	AutoInit = true // very helpful!
 };
 var repository = await client.Repository.Create(newRepo);
 Console.WriteLine("Browse the repository at: " + repository.HtmlUrl);
@@ -53,14 +60,11 @@ createdTree.Dump();
 var master = await client.GitDatabase.Reference.Get(owner, repo, "heads/master");
 
 var newCommit = new NewCommit(
-  "Hello World!", 
-  createdTree.Sha, 
-  new[] { master.Object.Sha });
-newCommit.Author = new Signature() { 
-  Name =  author,
-  Email = email,
-  Date = DateTime.UtcNow
-};
+  "Hello World!",
+  createdTree.Sha,
+  new[] { master.Object.Sha })
+{ Author = new SignatureResponse(author,email,DateTime.UtcNow)};
+
 var createdCommit = await client.GitDatabase.Commit.Create(owner, repo, newCommit);
 createdCommit.Dump();
 

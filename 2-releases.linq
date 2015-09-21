@@ -15,7 +15,7 @@ var reponame = "octokit.net";
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 
 //Get releases for the octokit
-var releases = await client.Release.GetAll("octokit", "octokit.net");
+var releases = await client.Release.GetAll(owner, reponame);
 releases.Select(r => new { r.Name, r.Body }).Dump("Releases");
 
 //Don't want draft release and because we are using reactive the first one is the latest one.
