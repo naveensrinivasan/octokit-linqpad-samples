@@ -1,17 +1,14 @@
 <Query Kind="Statements">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
   <NuGetReference>Octokit.Reactive</NuGetReference>
   <NuGetReference>Rx-Main</NuGetReference>
   <Namespace>Octokit</Namespace>
-  <Namespace>System.Net.Http.Headers</Namespace>
   <Namespace>System.Reactive.Linq</Namespace>
 </Query>
 
 var owner = "octokit";
 var reponame = "octokit.net";
 
-var client = new GitHubClient(new Octokit.ProductHeaderValue("octokit samples"));
+var client = new GitHubClient(new Octokit.ProductHeaderValue("octokitsamples"));
 
 var repository = await client.Repository.Get(owner, reponame);
 
