@@ -11,6 +11,7 @@
   <Namespace>System.Reactive.Linq</Namespace>
 </Query>
 
+var userName = "haacked";
 var client = new ObservableGitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 
-client.Repository.GetAllForUser("shiftkey").Select(r => r.Name).Dump();
+client.Repository.GetAllForUser(userName).Select(r => r.Name).Dump();

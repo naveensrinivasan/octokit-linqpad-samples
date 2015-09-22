@@ -1,19 +1,15 @@
 <Query Kind="Statements">
-  <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
-  <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
-  <NuGetReference>Octokit</NuGetReference>
   <NuGetReference>Octokit.Reactive</NuGetReference>
   <NuGetReference>Rx-Main</NuGetReference>
-  <Namespace>System.Reactive.Linq</Namespace>
-  <Namespace>System.Net.Http.Headers</Namespace>
   <Namespace>Octokit</Namespace>
+  <Namespace>Octokit.Reactive</Namespace>
 </Query>
 
 var userName = "haacked";
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 
 var repositories = await client.Repository.GetAllForUser(userName);
-repositories.Select(r => new { r.Name }).Dump();
+repositories.Select(r => new { r.Name }).Dump(userName + "Repos");
 
 // basic authentication
 //client.Credentials = new Credentials("username", "password");
@@ -26,4 +22,4 @@ client.Credentials = new Credentials(Util.GetPassword("github"));
 
 // and then fetch the repositories for the current user
 var repos = await client.Repository.GetAllForCurrent();
-repos.Select(r => r.Name).Dump();
+repos.Select(r => r.Name).Dump("Your Repos");
