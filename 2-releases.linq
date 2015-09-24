@@ -21,6 +21,7 @@ var assets = await client.Release.GetAllAssets(owner,reponame,latestrelease.Id);
 assets.Dump("Assets");
 var latestreleaseassetid = assets.First(a => a.Name.Contains("Reactive")).Id;
 var asset = await client.Release.GetAsset(owner,reponame,latestreleaseassetid);
+asset.DownloadCount.Dump("Download Count for this release");
 
 //Download the release
 var wc = new WebClient();
