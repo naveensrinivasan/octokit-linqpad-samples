@@ -44,7 +44,7 @@ async Task Main()
 		Comments = issueComments.FirstOrDefault(c => c.IssueNumber == i.Number)
 					.Comments.Select(c => 
 					new { User = c.User.Id, 
-						  Name = c.User.Name,  	
+						  Name = c.User.Login,  	
 						   Content = c.Body, 
 						   Date = c.CreatedAt, 
 						   Id = c.Id, c.Body})
