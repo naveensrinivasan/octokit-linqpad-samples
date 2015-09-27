@@ -25,10 +25,11 @@
 
 var client = new GitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
 var emojis = await client.Miscellaneous.GetAllEmojis();
-
-foreach (var emoji in emojis)
-{
-  // i'm lazy, so the image is after th eky
-  String.Format(":{0}:", emoji.Name).Dump();
-  Util.Image (emoji.Url).Dump();
-}
+var misc =client.Miscellaneous;
+client.Search.
+//foreach (var emoji in emojis)
+//{
+//  // i'm lazy, so the image is after th eky
+//  String.Format(":{0}:", emoji.Name).Dump();
+//  Util.Image (emoji.Url).Dump();
+//}
