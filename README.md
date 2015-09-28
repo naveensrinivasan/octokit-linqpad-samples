@@ -1,5 +1,8 @@
 ## Octokit.net Linqpad Samples
-Learning new API's as I discover hacking it.
-
 
 Some quick demos of the Octokit.net API
+
+These samples could be loaded in to LinqPad samples 
+
+
+![](http://i.imgur.com/1JU6Yne.jpg)
