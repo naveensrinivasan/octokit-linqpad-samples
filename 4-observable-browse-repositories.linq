@@ -1,4 +1,4 @@
-<Query Kind="Statements">
+<Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
   <NuGetReference>Octokit</NuGetReference>
@@ -11,7 +11,17 @@
   <Namespace>System.Reactive.Linq</Namespace>
 </Query>
 
-var userName = "haacked";
-var client = new ObservableGitHubClient(new Octokit.ProductHeaderValue("Bay.NET"));
+void Main()
+{
+	var owner = string.Empty;
+	
+	#if CMD
+		owner = args[0];
+	#else
+		owner = "octokit";
+	#endif
+	
+	var client = new ObservableGitHubClient(new Octokit.ProductHeaderValue("Octokit.samples"));
+	client.Repository.GetAllForUser(owner).Select(r => r.Name).Dump();
+}
 
-client.Repository.GetAllForUser(userName).Select(r => r.Name).Dump();
