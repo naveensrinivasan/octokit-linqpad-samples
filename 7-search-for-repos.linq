@@ -1,4 +1,4 @@
-<Query Kind="Statements">
+<Query Kind="Program">
   <Reference>&lt;RuntimeDirectory&gt;\System.Net.Http.dll</Reference>
   <Reference>&lt;RuntimeDirectory&gt;\System.Runtime.dll</Reference>
   <NuGetReference>Octokit</NuGetReference>
@@ -7,21 +7,25 @@
   <Namespace>System.Reactive.Linq</Namespace>
   <Namespace>System.Net.Http.Headers</Namespace>
   <Namespace>Octokit</Namespace>
+  <Namespace>System.Threading.Tasks</Namespace>
 </Query>
 
-//This makes discovering code fun!!
-var client = new GitHubClient(new Octokit.ProductHeaderValue("Naveen"));
-var gorepos = await client.Search.SearchRepo(new SearchRepositoriesRequest(string.Empty)
-	{Language = Language.Go});
-gorepos.Items.OrderByDescending (i => i.CreatedAt)
-	.OrderByDescending (i => i.WatchersCount)
-	.Take(50)
-	.Select (i => new {
-			Name = i.Name, 
-			Description = i.Description ,
-			LastUpdated = i.UpdatedAt,
-			Url = i.HtmlUrl,
-			WatchCount = i.WatchersCount
-			})
-	.Dump();
-
+async Task Main()
+{
+	//This makes discovering code fun!!
+	var client = new GitHubClient(new Octokit.ProductHeaderValue("octokit"));
+	var gorepos = await client.Search.SearchRepo(new SearchRepositoriesRequest()
+		{Language = Language.Go});
+		
+	gorepos.Items.OrderByDescending (i => i.CreatedAt)
+		.OrderByDescending (i => i.StargazersCount)
+		.Take(50)
+		.Select (i => new {
+				Name = i.Name, 
+				Description = i.Description ,
+				LastUpdated = i.UpdatedAt,
+				Url = i.HtmlUrl,
+				WatchCount = i.StargazersCount
+				})
+		.Dump();
+}
